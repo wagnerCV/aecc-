@@ -13,8 +13,11 @@ export async function generateStaticParams() {
     id: article.sys.id,
   }));
 }
+interface Params {
+  id: string;
+}
 
-export default async function KnowledgeArticlePage({ params }) {
+export default async function KnowledgeArticlePage({ params }: { params: Params }) {
   const { isEnabled } = draftMode();
   const article = await getArticle(params.id, isEnabled);
   if (!article) {
