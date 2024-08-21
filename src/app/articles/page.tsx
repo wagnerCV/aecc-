@@ -7,6 +7,8 @@ import Link from "next/link";
 import { draftMode } from "next/headers";
 
 import { Metadata } from "next";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Blog Page | Free Next.js Template for Startup and SaaS",
@@ -34,7 +36,7 @@ export default async function Blog() {
   <div className="container mx-auto px-4">
     <div className="flex flex-wrap -mx-4">
       {articles?.length > 0 ? (
-        articles.map((article) => (
+        articles.map((article: { sys: { id: Key | null | undefined; }; articleImage: { url: string | StaticImport; }; title: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; categoryName: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; summary: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; authorName: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }) => (
           <article
             key={article.sys.id}
             className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8"
