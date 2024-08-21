@@ -8,7 +8,11 @@ import { draftMode } from "next/headers";
 
 export async function generateStaticParams() {
   const allArticles = await getAllArticles();
-
+  if (!allArticles) {
+    // Handle the case where no articles are returned
+    return [];
+  }
+  
   return allArticles.map((article: { sys: { id: any } }) => ({
     id: article.sys.id,
   }));
