@@ -5,6 +5,51 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import { Carousel } from "antd";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+const contentStyle: React.CSSProperties = {
+  margin: 0,
+  height: "360px",
+  width: "100%",
+  color: "#fff",
+  lineHeight: "160px",
+  textAlign: "center",
+  background: "transparent", // Mantém o fundo transparente
+  display: "flex",
+  justifyContent: "center", // Centraliza a imagem horizontalmente
+  alignItems: "center", // Centraliza a imagem verticalmente
+  overflow: "hidden", // Garante que a imagem não exceda os limites do container
+  maxHeight: "100%", // Garante que a imagem não exceda a altura do container
+  maxWidth: "100%", // Garante que a imagem não exceda a largura do container
+  objectFit: "contain",
+  zIndex: 2,
+  position: "relative",
+};
+function getBackgroundStyle(imageUrl: string): React.CSSProperties {
+  return {
+    margin: 0,
+    position: "absolute",
+    height: "360px",
+    width: "100%",
+    color: "#fff",
+    lineHeight: "160px",
+    textAlign: "center",
+    background: "transparent", // Mantém o fundo transparente
+    display: "flex",
+    justifyContent: "center", // Centraliza a imagem horizontalmente
+    alignItems: "center", // Centraliza a imagem verticalmente
+    overflow: "hidden", // Garante que a imagem não exceda os limites do container
+    maxHeight: "100%", // Garante que a imagem não exceda a altura do container
+    maxWidth: "100%", // Garante que a imagem não exceda a largura do container
+    backgroundImage: `url(${imageUrl})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    filter: "blur(20px)", // Aplica o desfoque
+    transform: "scale(1.1)", // Escala a imagem para evitar bordas visíveis
+    zIndex: -1,
+  };
+}
 
 export async function generateStaticParams() {
   const allArticles = await getAllArticles();
@@ -12,7 +57,7 @@ export async function generateStaticParams() {
     // Handle the case where no articles are returned
     return [];
   }
-  
+
   return allArticles.map((article: { sys: { id: any } }) => ({
     id: article.sys.id,
   }));
@@ -21,12 +66,23 @@ interface Params {
   id: string;
 }
 
-export default async function KnowledgeArticlePage({ params }: { params: Params }) {
+export default async function KnowledgeArticlePage({
+  params,
+}: {
+  params: Params;
+}) {
   const { isEnabled } = draftMode();
   const article = await getArticle(params.id, isEnabled);
   if (!article) {
     notFound();
   }
+
+  // Transform the images for the Carousel
+  const images = article.myImagesCollection.items.map(
+    (item: { url: string }) => ({
+      image: item.url,
+    })
+  );
 
   return (
     <section className="pb-[120px] pt-[150px]">
@@ -43,7 +99,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                     <div className="mr-4">
                       <div className="relative h-10 w-10 overflow-hidden rounded-full">
                         <Image
-                          src="/images/blog/author-02.png"
+                          src={article.authorImage?.url || "/favicon1.png"}
                           alt="author"
                           fill
                         />
@@ -51,7 +107,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                     </div>
                     <div className="w-full">
                       <span className="mb-1 text-base font-medium text-body-color">
-                        By <span>Musharof Chy</span>
+                        By <span>{article.authorName || "Aecc"}</span>
                       </span>
                     </div>
                   </div>
@@ -75,9 +131,15 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                           <path d="M13.2637 3.3697H7.64754V2.58105C8.19721 2.43765 8.62738 1.91189 8.62738 1.31442C8.62738 0.597464 8.02992 0 7.28906 0C6.54821 0 5.95074 0.597464 5.95074 1.31442C5.95074 1.91189 6.35702 2.41376 6.93058 2.58105V3.3697H1.31442C0.597464 3.3697 0 3.96716 0 4.68412V13.2637C0 13.9807 0.597464 14.5781 1.31442 14.5781H13.2637C13.9807 14.5781 14.5781 13.9807 14.5781 13.2637V4.68412C14.5781 3.96716 13.9807 3.3697 13.2637 3.3697ZM6.6677 1.31442C6.6677 0.979841 6.93058 0.716957 7.28906 0.716957C7.62364 0.716957 7.91042 0.979841 7.91042 1.31442C7.91042 1.649 7.64754 1.91189 7.28906 1.91189C6.95448 1.91189 6.6677 1.6251 6.6677 1.31442ZM1.31442 4.08665H13.2637C13.5983 4.08665 13.8612 4.34954 13.8612 4.68412V6.45261H0.716957V4.68412C0.716957 4.34954 0.979841 4.08665 1.31442 4.08665ZM13.2637 13.8612H1.31442C0.979841 13.8612 0.716957 13.5983 0.716957 13.2637V7.16957H13.8612V13.2637C13.8612 13.5983 13.5983 13.8612 13.2637 13.8612Z" />
                         </svg>
                       </span>
-                      12 Jan 2024
+                      {new Date(article.date).toLocaleDateString("pt-PT", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </p>
-                    <p className="mr-5 flex items-center text-base font-medium text-body-color">
+
+                    {/* 
+                      <p className="mr-5 flex items-center text-base font-medium text-body-color">
                       <span className="mr-3">
                         <svg
                           width="18"
@@ -106,13 +168,12 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                       </span>
                       35
                     </p>
+                    */}
                   </div>
                 </div>
                 <div className="mb-5">
-                  <a
-                    href="#0"
-                    className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
-                  >
+                  {/*  href="#0"*/}
+                  <a className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white">
                     {article.categoryName}
                   </a>
                 </div>
@@ -132,15 +193,12 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                   </div>
                 </div>
                 <div className="mb-8 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                  {documentToReactComponents(article.details.json)}
+                  {documentToReactComponents(article.details)}
                 </div>
 
                 <div className="relative z-10 mb-10 overflow-hidden rounded-md bg-primary bg-opacity-10 p-8 md:p-9 lg:p-8 xl:p-9">
                   <p className="text-center text-base font-medium italic text-body-color">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod incididunt utionals labore et dolore magna
-                    aliqua. Quis lobortis scelerisque fermentum, The Neque ut
-                    etiam sit amet.
+                    {article.detailsItalic}
                   </p>
                   <span className="absolute left-0 top-0 z-[-1]">
                     <svg
@@ -276,6 +334,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                   </span>
                 </div>
                 <div className="items-center justify-between sm:flex">
+                  {/*  
                   <div className="mb-5">
                     <h4 className="mb-3 text-sm font-medium text-body-color">
                       Popular Tags :
@@ -286,6 +345,7 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                       <TagButton text="Info" />
                     </div>
                   </div>
+                  */}
                   <div className="mb-5">
                     <h5 className="mb-3 text-sm font-medium text-body-color sm:text-right">
                       Share this post :
@@ -296,6 +356,28 @@ export default async function KnowledgeArticlePage({ params }: { params: Params 
                   </div>
                 </div>
               </div>
+              <Carousel arrows infinite={false} draggable={true}>
+                {images.map(
+                  (
+                    img: { image: string },
+                    index: React.Key | null | undefined
+                  ) => {
+                    // Verifica se a imagem existe
+                    const imageUrl = img.image || ""; // Define imageUrl dentro do escopo correto
+
+                    return (
+                      <div key={index}>
+                        <div style={getBackgroundStyle(imageUrl)}></div>
+                        <img
+                          src={imageUrl}
+                          alt={`Slide ${index}`}
+                          style={contentStyle}
+                        />
+                      </div>
+                    );
+                  }
+                )}
+              </Carousel>
             </div>
           </div>
         </div>

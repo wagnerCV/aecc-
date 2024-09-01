@@ -220,9 +220,7 @@ const Footer = () => {
             <p className="text-center text-base text-body-color dark:text-white">
             © 2024 All rights reserved{" "}
               <a
-                href="http://uideck.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/"
                 className="hover:text-primary"
               >
                 AECC 

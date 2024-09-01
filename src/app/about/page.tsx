@@ -4,6 +4,12 @@ import AboutSectionTwo from "@/components/About/AboutSectionTwo";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Member from "@/components/Member";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AECC | Sobre Nós",
+  // other metadata
+};
 
 const AboutPage = () => {
   return (

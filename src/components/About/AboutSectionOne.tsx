@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionTitle from "../Common/SectionTitle";
+import { motion } from "framer-motion";
 
 const checkIcon = (
   <svg width="16" height="13" viewBox="0 0 16 13" className="fill-current">
@@ -19,56 +20,54 @@ const AboutSectionOne = () => {
 
   return (
     <section id="about" className="pt-16 md:pt-20 lg:pt-8">
-  <div className="container">
-    <div className="border-b border-body-color/[.15] pb-16 dark:border-white/[.15] md:pb-20 lg:pb-28">
-      <div className="-mx-4 flex flex-wrap items-center">
-        <div className="w-full px-4 lg:w-1/2">
-          <SectionTitle
-            title="Nossos Valores"
-            paragraph="Na Associação de Estudantes Cabo-Verdianos na China, acreditamos que nossos valores fundamentais são a base de todas as nossas iniciativas e atividades. Eles não apenas orientam nossas ações e decisões diárias, mas também refletem o compromisso com a excelência e o apoio mútuo que definem nossa comunidade."
-            mb="24px"
-          />
+      <div className="container">
+        <div className="border-b border-body-color/[.15] pb-16 dark:border-white/[.15] md:pb-20 lg:pb-28">
+          <div className="-mx-4 flex flex-wrap items-center">
+            <div className="w-full px-4 lg:w-1/2">
+              <SectionTitle
+                title="Nossos Valores"
+                paragraph="Na Associação de Estudantes Cabo-Verdianos na China, acreditamos que nossos valores fundamentais são a base de todas as nossas iniciativas e atividades. Eles não apenas orientam nossas ações e decisões diárias, mas também refletem o compromisso com a excelência e o apoio mútuo que definem nossa comunidade."
+                mb="24px"
+              />
 
-          <div
-            className="mb-12 max-w-[570px] lg:mb-0"
-            data-wow-delay=".15s"
-          >
-            <div className="mx-[-12px] flex flex-wrap">
-              <div className="w-full px-3 sm:w-1/2 lg:w-full">
-                <List text="União: Fomentamos a coesão e a solidariedade entre nossos membros." />
-                <List text="Excelência: Promovemos o desempenho acadêmico e o desenvolvimento pessoal." />
-                <List text="Cultura: Valorizamos e celebramos nossas raízes cabo-verdianas, enquanto aprendemos e respeitamos a cultura chinesa." />
-                <List text="Apoio: Oferecemos suporte em questões acadêmicas, emocionais e sociais." />
+              <div
+                className="mb-12 max-w-[570px] lg:mb-0"
+                data-wow-delay=".15s"
+              >
+                <div className="mx-[-12px] flex flex-wrap">
+                  <div className="w-full px-3 sm:w-1/2 lg:w-full">
+                    <List text="União: Fomentamos a coesão e a solidariedade entre nossos membros." />
+                    <List text="Excelência: Promovemos o desempenho acadêmico e o desenvolvimento pessoal." />
+                    <List text="Cultura: Valorizamos e celebramos nossas raízes cabo-verdianas, enquanto aprendemos e respeitamos a cultura chinesa." />
+                    <List text="Apoio: Oferecemos suporte em questões acadêmicas, emocionais e sociais." />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="w-full px-4 lg:w-1/2">
+              <div className="relative mx-auto grid grid-cols-1 gap-4 sm:grid-cols-1 lg:grid-cols-1 aspect-[25/24] max-w-[500px] lg:mr-0">
+                <div className="relative aspect-[2/1] row-span-2 h-full">
+                  <Image
+                    src="/images/about/grupo1.jpg"
+                    alt="Image 1"
+                    fill
+                    className="object-cover drop-shadow-lg rounded-2xl"
+                  />
+                </div>
+                <div className="relative aspect-[2/1]">
+                  <Image
+                    src="/images/about/aecc3.jpg"
+                    alt="Image 3"
+                    fill
+                    className="object-cover drop-shadow-lg rounded-2xl"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="w-full px-4 lg:w-1/2">
-          <div className="relative mx-auto grid grid-cols-1 gap-4 sm:grid-cols-1 lg:grid-cols-1 aspect-[25/24] max-w-[500px] lg:mr-0">
-            <div className="relative aspect-[2/1] row-span-2 h-full">
-              <Image
-                src="/images/about/grupo1.jpg"
-                alt="Image 1"
-                fill
-                className="object-cover drop-shadow-lg rounded-2xl"
-              />
-            </div>
-            <div className="relative aspect-[2/1]">
-              <Image
-                src="/images/about/aecc3.jpg"
-                alt="Image 3"
-                fill
-                className="object-cover drop-shadow-lg rounded-2xl"
-              />
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </div>
-</section>
-
+    </section>
   );
 };
 
