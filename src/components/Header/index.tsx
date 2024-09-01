@@ -205,6 +205,10 @@ const Header = () => {
                       />
                     </li>
                   )}
+                  {/* ThemeToggler para mobile */}
+                  <li className="block md:hidden">
+                    <ThemeToggler />
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -228,7 +232,7 @@ const Header = () => {
                   </Link>
                   <Link
                     href="/signup"
-                    className="ease-in-up shadow-primary hover:shadow-primary/80 rounded bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-3 lg:px-8"
+                    className="hidden shadow-btn hover:shadow-btn-hover rounded-md bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-3 lg:px-8"
                   >
                     Sign Up
                   </Link>
