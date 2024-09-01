@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
-import { UserButton, useUser } from "@clerk/nextjs"; // Importando o UserButton e useUser
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const Header = () => {
   // Navbar toggle
@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   const usePathName = usePathname();
-  const { isSignedIn } = useUser(); // Verifica se o usuário está autenticado
+  const { isSignedIn } = useUser();
 
   return (
     <>
@@ -171,37 +171,59 @@ const Header = () => {
                         )}
                       </li>
                     ))}
+                    {/* Botões Sign In e Sign Up para mobile */}
+                    {!isSignedIn && (
+                      <>
+                        <li>
+                          <Link
+                            href="/signin"
+                            className="block px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:hidden"
+                            onClick={navbarToggleHandler}
+                          >
+                            Sign In
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/signup"
+                            className="block shadow-btn hover:shadow-btn-hover rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:hidden"
+                            onClick={navbarToggleHandler}
+                          >
+                            Sign Up
+                          </Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </nav>
               </div>
-              <div className="flex items-center justify-end pr-16 lg:pr-0">
-                {isSignedIn ? ( // Verifica se o usuário está autenticado
+              <div className="hidden items-center justify-end pr-16 md:flex lg:pr-0">
+                {isSignedIn ? (
                   <UserButton
-                  afterSignOutUrl="/"
-                  appearance={{
-                    elements: {
-                      userButtonAvatarBox: "size-10",
-                    },
-                  }} /> // Renderiza o UserButton se o usuário estiver autenticado
+                    afterSignOutUrl="/"
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox: "size-10",
+                      },
+                    }}
+                  />
                 ) : (
                   <>
                     <Link
                       href="/signin"
                       className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
-                      onClick={navbarToggleHandler}
                     >
                       Sign In
                     </Link>
                     <Link
                       href="/signup"
-                      className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
-                      onClick={navbarToggleHandler}
+                      className="ease-in-up shadow-primary hover:shadow-primary/80 rounded bg-primary px-8 py-3 text-base font-medium text-white duration-300 hover:bg-opacity-90 md:block md:text-sm lg:px-5 lg:text-base"
                     >
                       Sign Up
                     </Link>
                   </>
                 )}
-                <div>
+                <div className="pl-4">
                   <ThemeToggler />
                 </div>
               </div>

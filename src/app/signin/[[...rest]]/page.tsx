@@ -1,16 +1,14 @@
-import { SignIn } from '@clerk/nextjs'
+import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
-
-
   return (
     <>
-      <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[80px]">
+      <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[80px] flex items-center justify-center min-h-screen">
         <div className="container">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[500px] rounded px-6 py-1 sm:p-[60px]">
-              <SignIn/>
+          <div className="-mx-4 flex flex-wrap justify-center">
+            <div className="w-full lg:w-1/2 xl:w-1/3">
+              <div className="mx-auto rounded px-6 py-1 sm:p-[60px]">
+                <SignIn />
               </div>
             </div>
           </div>
@@ -20,12 +18,8 @@ export default function Page() {
   );
 }
 
-
-
-
-
-
-{/*import Link from "next/link";
+{
+  /*import Link from "next/link";
 
 import { Metadata } from "next";
 
@@ -258,4 +252,5 @@ const SigninPage = () => {
 };
 
 export default SigninPage;
- */}
+ */
+}
