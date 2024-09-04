@@ -1,6 +1,16 @@
+"use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import Particles from "@/components/magicui/particles";
 
 const Hero = () => {
+  const { theme } = useTheme();
+  const [color, setColor] = useState("#ffffff");
+
+  useEffect(() => {
+    setColor(theme === "dark" ? "#ffffff" : "#000000");
+  }, [theme]);
   return (
     <>
       <section
@@ -26,8 +36,14 @@ const Hero = () => {
                   >
                     Saiba mais
                   </Link>
-                  
                 </div>
+                <Particles
+                  className="absolute inset-0"
+                  quantity={100}
+                  ease={80}
+                  color={color}
+                  refresh
+                />
               </div>
             </div>
           </div>
