@@ -1,6 +1,4 @@
 import { getArticle, getAllArticles } from "../../../../lib/api";
-import SharePost from "../../../components/Blog/SharePost";
-import TagButton from "../../../components/Blog/TagButton";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 import { notFound } from "next/navigation";
