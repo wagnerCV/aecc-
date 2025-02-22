@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "AECC",
   description: "Associação dos Estudantes Cabo-verdianos na China",
   // other metadata
+  other: {
+    "google-adsense-account": "ca-pub-1767079045992000",
+  },
 };
 
 export default async function Home() {
