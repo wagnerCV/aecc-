@@ -29,6 +29,8 @@ export default function RootLayout({
       */}
       
       <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1767079045992000"
+     crossorigin="anonymous"></script>
       <link rel="icon" href="favicon1.png" /> 
       </head>
 
