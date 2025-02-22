@@ -34,8 +34,6 @@ export default function RootLayout({
         <meta name="google-adsense-account" content="ca-pub-1767079045992000" />
       </Head>
 
-      </head>
-
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <Providers>
           <Header />
