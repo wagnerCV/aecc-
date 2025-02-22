@@ -30,6 +30,7 @@ export default function RootLayout({
       
       <head>
       <link rel="icon" href="favicon1.png" /> 
+        <meta name="google-adsense-account" content="ca-pub-1767079045992000">
       </head>
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
