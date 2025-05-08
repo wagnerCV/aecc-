@@ -191,7 +191,7 @@ export default async function KnowledgeArticlePage({
                   </div>
                 </div>
                 <div className="mb-8 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                  {documentToReactComponents(article.details)}
+                  {documentToReactComponents(article.details.json)}
                 </div>
 
                 <div className="relative z-10 mb-10 overflow-hidden rounded-md bg-primary bg-opacity-10 p-8 md:p-9 lg:p-8 xl:p-9">
