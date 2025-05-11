@@ -190,7 +190,7 @@ export default async function KnowledgeArticlePage({
                     />
                   </div>
                 </div>
-                <div className="mb-8 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+                <div className="mb-8 text-base font-medium leading-relaxed text-body-color text-justify sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
                   {documentToReactComponents(article.details.json)}
                 </div>
 
